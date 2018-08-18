@@ -8,7 +8,7 @@ import mongoose from 'mongoose';
 
 import * as OrderLoader from './src/loaders/OrderLoader';
 
-mongoose.connect('mongodb://localhost/albelli');  // Your database endpoint goes here. Example: mongodb://user:password@ds999999.mlab.com:99999/myApp
+mongoose.connect('mongodb://localhost/albelli');
 const PORT = process.env.PORT || 5000;
 
 const app = new Koa();
@@ -37,29 +37,39 @@ router.get('/orders', async (ctx) => {
 });
 
 router.get('/order/:id', async (ctx) => {
-  // if(!bodyInfo.username || !bodyInfo.password) {
-  //     ctx.status = 402;
-  //     ctx.body = "Error, username and password must be provided!";
-  // }
+  if (!ctx.params || !ctx.params.id) {
+    ctx.status = 400;
+    ctx.body = {
+      status: 'error',
+      message: 'Invalid order id',
+    };
+    return;
+  }
 
   try {
-    const order = await OrderLoader.load({ _id: ctx.params.id});
+    const order = await OrderLoader.load({ _id: ctx.params.id });
     ctx.body = {
       status: 'success',
       data: order,
     };
   } catch (err) {
-    // ctx.status = 402;
-    // ctx.body = "Error, username and password must be provided!";
-    console.log(err);
+    ctx.status = 500;
+    ctx.body = {
+      status: 'error',
+      message: 'Something went wrong while trying to get the order!',
+    };
   }
 });
 
 router.put('/orderEdit/:id', async (ctx) => {
-  // if(!bodyInfo.username || !bodyInfo.password) {
-  //     ctx.status = 402;
-  //     ctx.body = "Error, username and password must be provided!";
-  // }
+  if (!ctx.params || !ctx.params.id) {
+    ctx.status = 400;
+    ctx.body = {
+      status: 'error',
+      message: 'Invalid order id',
+    };
+    return;
+  }
 
   try {
     const order = await OrderLoader.edit({ _id: ctx.params.id, values: ctx.request.body });
@@ -68,17 +78,23 @@ router.put('/orderEdit/:id', async (ctx) => {
       data: order,
     };
   } catch (err) {
-    // ctx.status = 402;
-    // ctx.body = "Error, username and password must be provided!";
-    console.log(err);
+    ctx.status = 500;
+    ctx.body = {
+      status: 'error',
+      message: 'Something went wrong while trying to edit the order!',
+    };
   }
 });
 
 router.post('/orderAdd', async (ctx) => {
-  // if(!bodyInfo.username || !bodyInfo.password) {
-  //     ctx.status = 402;
-  //     ctx.body = "Error, username and password must be provided!";
-  // }
+  if (!ctx.request || !ctx.request.body) {
+    ctx.status = 400;
+    ctx.body = {
+      status: 'error',
+      message: 'Invalid order data',
+    };
+    return;
+  }
 
   try {
     const order = await OrderLoader.add({ values: ctx.request.body });
@@ -87,9 +103,11 @@ router.post('/orderAdd', async (ctx) => {
       data: order,
     };
   } catch (err) {
-    // ctx.status = 402;
-    // ctx.body = "Error, username and password must be provided!";
-    console.log(err);
+    ctx.status = 500;
+    ctx.body = {
+      status: 'error',
+      message: 'Something went wrong while trying to add the order!',
+    };
   }
 });
 
