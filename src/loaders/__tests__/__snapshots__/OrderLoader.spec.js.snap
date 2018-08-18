@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`shuld add a new order 1`] = `
+Object {
+  "_id": "mocked-order-id",
+  "address": Object {
+    "_id": "mocked-address-id",
+    "number": 10,
+    "postcode": "098765",
+    "street": "Mocked street",
+  },
+  "customerName": "Tiago",
+  "price": 10.5,
+}
+`;
