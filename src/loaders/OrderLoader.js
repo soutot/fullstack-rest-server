@@ -24,3 +24,10 @@ export const edit = async ({ _id, values }) => {
     return doc;
   });
 };
+
+export const add = async ({ values }) => {
+  const newOrder = new OrderModel(values);
+  await newOrder.save();
+
+  return newOrder;
+};

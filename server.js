@@ -74,11 +74,29 @@ router.put('/orderEdit/:id', async (ctx) => {
   }
 });
 
+router.post('/orderAdd', async (ctx) => {
+  // if(!bodyInfo.username || !bodyInfo.password) {
+  //     ctx.status = 402;
+  //     ctx.body = "Error, username and password must be provided!";
+  // }
+
+  try {
+    const order = await OrderLoader.add({ values: ctx.request.body });
+    ctx.body = {
+      status: 'success',
+      data: order,
+    };
+  } catch (err) {
+    // ctx.status = 402;
+    // ctx.body = "Error, username and password must be provided!";
+    console.log(err);
+  }
+});
+
 // app.use(router.routes()).use(router.allowedMethods());
 app.use(cors(koaOptions));
 app.use(bodyParser());
 app.use(router.routes());
-  
 
 app.listen(PORT, () => {
   console.info('Server running on port %s', PORT);
