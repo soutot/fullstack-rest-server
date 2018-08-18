@@ -2,6 +2,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 // import convert from 'koa-convert';
 import cors from 'koa-cors';
+import bodyParser from 'koa-body-parser';
 
 import mongoose from 'mongoose';
 
@@ -54,7 +55,28 @@ router.get('/order/:id', async (ctx) => {
   }
 });
 
+router.put('/orderEdit/:id', async (ctx) => {
+  // if(!bodyInfo.username || !bodyInfo.password) {
+  //     ctx.status = 402;
+  //     ctx.body = "Error, username and password must be provided!";
+  // }
+
+  try {
+    const order = await OrderLoader.edit({ _id: ctx.params.id, values: ctx.request.body });
+    ctx.body = {
+      status: 'success',
+      data: order,
+    };
+  } catch (err) {
+    // ctx.status = 402;
+    // ctx.body = "Error, username and password must be provided!";
+    console.log(err);
+  }
+});
+
+// app.use(router.routes()).use(router.allowedMethods());
 app.use(cors(koaOptions));
+app.use(bodyParser());
 app.use(router.routes());
   
 

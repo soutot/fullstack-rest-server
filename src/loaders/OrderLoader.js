@@ -15,6 +15,12 @@ export const load = async ({ _id }) => {
 
 export const loadAll = async () => {
   const order = await OrderModel.find();
-  console.log('------------order', order);
   return order;
+};
+
+export const edit = async ({ _id, values }) => {
+  return await OrderModel.findOneAndUpdate({ _id }, values, { upsert:true }, (err, doc) => {
+    if (err) return null;
+    return doc;
+  });
 };
