@@ -15,5 +15,6 @@ export const load = async ({ _id }) => {
 
 export const loadAll = async () => {
   const order = await OrderModel.find();
+  console.log('------------order', order);
   return order;
 };

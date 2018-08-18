@@ -1,6 +1,7 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 // import convert from 'koa-convert';
+import cors from 'koa-cors';
 
 import mongoose from 'mongoose';
 
@@ -11,13 +12,9 @@ const PORT = process.env.PORT || 5000;
 
 const app = new Koa();
 const router = new Router();
-
-// router.all(
-//   '/playground',
-//   koaPlayground({
-//     endpoint: '/graphql',
-//   }),
-// );
+const koaOptions = {
+  origin: '*',
+};
 
 router.get('/', async (ctx) => {
   ctx.body = {
@@ -39,19 +36,27 @@ router.get('/orders', async (ctx) => {
 });
 
 router.get('/order/:id', async (ctx) => {
+  // if(!bodyInfo.username || !bodyInfo.password) {
+  //     ctx.status = 402;
+  //     ctx.body = "Error, username and password must be provided!";
+  // }
+
   try {
-    const order = await OrderLoader.load();
+    const order = await OrderLoader.load({ _id: ctx.params.id});
     ctx.body = {
       status: 'success',
       data: order,
     };
   } catch (err) {
+    // ctx.status = 402;
+    // ctx.body = "Error, username and password must be provided!";
     console.log(err);
   }
 });
 
-// app.use(router.routes()).use(router.allowedMethods());
+app.use(cors(koaOptions));
 app.use(router.routes());
+  
 
 app.listen(PORT, () => {
   console.info('Server running on port %s', PORT);
