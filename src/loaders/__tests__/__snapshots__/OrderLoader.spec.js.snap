@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`shuld add a new order 1`] = `
+exports[`should add a new order 1`] = `
 Object {
   "_id": "mocked-order-id",
   "address": Object {

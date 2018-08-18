@@ -2,7 +2,7 @@ import * as OrderLoader from '../OrderLoader';
 
 process.env.TEST_SUITE = 'orders-test';
 
-it('shuld add a new order', async () => {
+it('should add a new order', async () => {
   const values = {
     price: 10.5,
     customerName: 'Tiago',

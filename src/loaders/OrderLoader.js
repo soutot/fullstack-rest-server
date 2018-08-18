@@ -7,7 +7,6 @@ import OrderModel from '../models/order';
 
 export const load = async ({ _id }) => {
   const order = await OrderModel.findOne({ _id });
-  const orders = await OrderModel.find();
   if (!order) return null;
 
   return order;
