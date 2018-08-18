@@ -98,6 +98,14 @@ router.post('/orderAdd', async (ctx) => {
 
   try {
     const order = await OrderLoader.add({ values: ctx.request.body });
+    if (!order) {
+      ctx.status = 400;
+      ctx.body = {
+        status: 'error',
+        message: 'Invalid order data',
+      };
+      return;
+    }
     ctx.body = {
       status: 'success',
       data: order,
