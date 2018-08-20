@@ -13,3 +13,18 @@ Object {
   "price": 10.5,
 }
 `;
+
+exports[`should edit an order 1`] = `
+Object {
+  "__v": 0,
+  "_id": "mocked-order-id",
+  "address": Object {
+    "_id": "mocked-address-id",
+    "number": 100,
+    "postcode": "123456",
+    "street": "Edited Mocked street",
+  },
+  "customerName": "Tiago",
+  "price": 10.5,
+}
+`;

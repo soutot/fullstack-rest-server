@@ -18,12 +18,11 @@ export const loadAll = async () => {
 };
 
 export const edit = async ({ _id, values }) => {
-  return await OrderModel.findOneAndUpdate({ _id }, {values}, { runValidators: true, new: true }, (err, doc) => {
+  return OrderModel.findOneAndUpdate({ _id }, { $set: values }, { runValidators: true, new: true }, (err, doc) => {
     if (err) {
       new Error(`Error: ${err}`);
       return null;
     }
-
     return doc;
   });
 };
