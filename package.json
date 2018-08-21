@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "jest",
-    "seed": "babel-node src/data/seeders/order.seeder.js",
+    "seed-order": "babel-node src/data/seeders/order.seeder.js",
+    "seed-issue": "babel-node src/data/seeders/issue.seeder.js",
     "start": "nodemon --ignore schemas/graphql/schema.json --exec babel-node server.js"
   },
   "author": "soutot",

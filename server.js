@@ -7,6 +7,7 @@ import bodyParser from 'koa-body-parser';
 import mongoose from 'mongoose';
 
 import * as OrderLoader from './src/loaders/OrderLoader';
+import * as IssueLoader from './src/loaders/IssueLoader';
 
 mongoose.connect('mongodb://localhost/albelli');
 const PORT = process.env.PORT || 5000;
@@ -115,6 +116,31 @@ router.post('/orderAdd', async (ctx) => {
     ctx.body = {
       status: 'error',
       message: 'Something went wrong while trying to add the order!',
+    };
+  }
+});
+
+router.get('/issues/:id', async (ctx) => {
+  if (!ctx.params || !ctx.params.id) {
+    ctx.status = 400;
+    ctx.body = {
+      status: 'error',
+      message: 'Invalid order id',
+    };
+    return;
+  }
+
+  try {
+    const issues = await IssueLoader.loadByOrder({ orderId: ctx.params.id });
+    ctx.body = {
+      status: 'success',
+      data: issues,
+    };
+  } catch (err) {
+    ctx.status = 500;
+    ctx.body = {
+      status: 'error',
+      message: 'Something went wrong while trying to get the issues!',
     };
   }
 });
