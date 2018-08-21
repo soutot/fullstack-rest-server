@@ -4,29 +4,34 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const addressSchema = new Schema({
-  street: { 
+  street: {
     type: String,
     required: true,
     trim: true,
-   },
-  number: { 
+  },
+  number: {
     type: Number,
     required: true,
-   },
-  postcode: { 
+  },
+  postcode: {
     type: String,
     required: true,
     trim: true,
-   },
+  },
 });
 
 const orderSchema = new Schema({
+  id: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   customerName: {
     type: String,
     required: true,
     trim: true,
   },
-  price: { 
+  price: {
     type: Number,
     required: true,
   },

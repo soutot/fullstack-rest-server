@@ -18,7 +18,8 @@ it('should add a new order', async () => {
   // TODO: improve this
   const result = {
     ...order._doc,
-    _id: 'mocked-order-id',
+    _id: 'mocked-order-_id',
+    id: 'mocked-order-id',
     address: {
       ...order._doc.address._doc,
       _id: 'mocked-address-id',
@@ -42,7 +43,7 @@ it('should edit an order', async () => {
 
   const order = await OrderLoader.add({ values });
 
-  await OrderLoader.load({ _id: order._id });
+  await OrderLoader.load({ id: order.id });
 
   const newValues = {
     price: 10.5,
@@ -54,12 +55,13 @@ it('should edit an order', async () => {
     },
   };
   
-  const editedOrder = await OrderLoader.edit({ _id: order._id, values: newValues });
+  const editedOrder = await OrderLoader.edit({ id: order.id, values: newValues });
 
   // TODO: improve this
   const result = {
     ...editedOrder._doc,
-    _id: 'mocked-order-id',
+    _id: 'mocked-order-_id',
+    id: 'mocked-order-id',
     address: {
       ...editedOrder._doc.address._doc,
       _id: 'mocked-address-id',

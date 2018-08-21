@@ -47,7 +47,7 @@ router.get('/order/:id', async (ctx) => {
   }
 
   try {
-    const order = await OrderLoader.load({ _id: ctx.params.id });
+    const order = await OrderLoader.load({ id: ctx.params.id });
     ctx.body = {
       status: 'success',
       data: order,
@@ -72,7 +72,7 @@ router.put('/orderEdit/:id', async (ctx) => {
   }
 
   try {
-    const order = await OrderLoader.edit({ _id: ctx.params.id, values: ctx.request.body });
+    const order = await OrderLoader.edit({ id: ctx.params.id, values: ctx.request.body });
     ctx.body = {
       status: 'success',
       data: order,

@@ -2,7 +2,7 @@
 
 exports[`should add a new order 1`] = `
 Object {
-  "_id": "mocked-order-id",
+  "_id": "mocked-order-_id",
   "address": Object {
     "_id": "mocked-address-id",
     "number": 10,
@@ -10,6 +10,7 @@ Object {
     "street": "Mocked street",
   },
   "customerName": "Tiago",
+  "id": "mocked-order-id",
   "price": 10.5,
 }
 `;
@@ -17,7 +18,7 @@ Object {
 exports[`should edit an order 1`] = `
 Object {
   "__v": 0,
-  "_id": "mocked-order-id",
+  "_id": "mocked-order-_id",
   "address": Object {
     "_id": "mocked-address-id",
     "number": 100,
@@ -25,6 +26,7 @@ Object {
     "street": "Edited Mocked street",
   },
   "customerName": "Tiago",
+  "id": "mocked-order-id",
   "price": 10.5,
 }
 `;
