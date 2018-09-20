@@ -9,7 +9,7 @@ import mongoose from 'mongoose';
 import * as OrderLoader from './src/loaders/OrderLoader';
 import * as IssueLoader from './src/loaders/IssueLoader';
 
-mongoose.connect('mongodb://localhost/albelli');
+mongoose.connect('mongodb://localhost/fullstack-rest');
 const PORT = process.env.PORT || 5000;
 
 const app = new Koa();

@@ -42,7 +42,7 @@ const closeConnection = () => {
 };
 
 async function initSeed() {
-  await mongoose.connect('mongodb://localhost/albelli');
+  await mongoose.connect('mongodb://localhost/fullstack-rest');
 
   console.log('***** seeding order instances...');
   await orderSeeder();
